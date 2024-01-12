@@ -17,7 +17,7 @@ DRIVE_DISK=local
 DB_CONNECTION=sqlite
 
 E salve tudo.
-4) execute isso: node ace migration:run
+<br>4) execute isso: node ace migration:run </br>
 5) coloque o servidor para rodar e teste tudo no insomnia: node ace serve --watch
 
 fim
