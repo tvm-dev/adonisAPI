@@ -9,6 +9,7 @@ Passo a passo para executar com sucesso esta api:
 1) Para instalar todos os pacotes, digite: npm install
 2) execute o lucid, escolhendo SQLite com terminal: node ace configure @adonisjs/lucid
 3)  Substutia o conteudo do arquivo .env por:
+   <br>
 PORT=3333
 HOST=0.0.0.0
 NODE_ENV=development
