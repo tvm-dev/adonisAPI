@@ -4,30 +4,32 @@ import Moment from 'App/Models/Moment'
 import bodyParserConfig from 'Config/bodyparser'
 
 export default class MomentsController {
-  public async index({}: HttpContextContract) {
-    const moments = await Moment.all()
+  public async index({ }: HttpContextContract) {
+    const moments = await Moment.query().preload('comments')
     return {
       data: moments,
     }
   }
 
-  public async store({request, response}: HttpContextContract) {
+  public async store({ request, response }: HttpContextContract) {
     const body = request.body()
     const moment = await Moment.create(body)
 
     response.status(201)
 
     return {
-     message: 'Momento criado com Sucesso!',  
-     data: moment,
+      message: 'Momento criado com Sucesso!',
+      data: moment,
     }
   }
 
   public async show({ params }: HttpContextContract) {
     const moment = await Moment.findOrFail(params.id)
 
-    //return { data: moment }
-    return moment
+    await moment.load('comments')
+
+    return { data: moment }
+    //return moment
   }
 
   public async update({ params, request }: HttpContextContract) {
@@ -46,10 +48,6 @@ export default class MomentsController {
       data: moment,
     }
 
-
-
-
-
   }
 
   public async destroy({ params }: HttpContextContract) {
@@ -61,6 +59,6 @@ export default class MomentsController {
       message: 'Momento apagado com Sucesso!',
       data: moment,
     }
-    
+
   }
 }
